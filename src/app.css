@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+
+.PT {
+  font-family: "PT Serif", serif;
+}
+
+.NS {
+  font-family: "Noto Sans", sans-serif;
+}
+
+.NSK {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+canvas {
+  display: block;
+}
