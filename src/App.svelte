@@ -94,7 +94,7 @@
 
 <div class="credit flex flex-col fixed bottom-15 right-1 p-3 rounded-md text-gray-50 bg-gray-800">
   <h1 class="text-2xl font-semibold">20704 김성훈</h1>
-  <a href="https://anter003.github.io/mate/" class="underline">Codeberg Repo</a>
+  <a href="https://anter003.github.io/mate/" class="underline">Github Repo</a>
   <img src="good.png" alt="야호" width="100px">
 </div>
 
