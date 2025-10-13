@@ -23,7 +23,7 @@ export function draw(p, w, h, eq, eq_diff, domain, mult, bias, x_i, eta, grads, 
 
 function equation(p, w, h, fn, domain, mult, bias, xz) {
     p.push();
-    p.stroke(255);
+    p.stroke(225);
     p.strokeWeight(3);
     p.noFill();
     p.translate(w / 2, h / 2);
