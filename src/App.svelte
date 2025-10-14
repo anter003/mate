@@ -85,7 +85,7 @@
     <input type="range" min="-30" max="30" step="0.1" bind:value={x_init} class="w-100">
   </div>
   <div class="flex items-center">
-    <span class="mr-1 block w-45">Step Size(η) : {eta}</span>
+    <span class="mr-1 block w-40">학습률(η) : {eta}</span>
     <input type="range" min="0.00001" max="0.01" step="0.00001" bind:value={eta} class="mr-3">
   </div>
   <div class="flex items-center">
