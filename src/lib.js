@@ -173,7 +173,7 @@ export class Eq {
     }
 
     random() {
-        const degree = randomFromArray([4,4,4,5]);
+        const degree = randomFromArray([4,4,5]);
         const terms = [];
 
         if (degree == 5) {
