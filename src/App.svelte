@@ -8,10 +8,10 @@
   let textbox = document.getElementById("textbox"); 
   let eqText = $state("x^4-2x^3-8x^2+5x");
 
-  let eq = $state(new Eq().from_string("x^4-2x^3-12x^2+3x"));
+  let eq = $state(new Eq().from_string("x^4-2x^3-12x^2+3x+5"));
   let eq_diff = $state(new Eq().from_string("4x^3-6x^2-24x+3"));
 
-  let domain = $state(25);
+  let domain = $state(20);
   let zoom = $state(1);
   let bias = $state(0);
   let x_init = $state(0);
@@ -38,7 +38,12 @@
     }
 
     eq = new Eq().from_string(eqText).clean();
-    eq_diff = new Eq().from_string(eqText).diff().clean()
+    eq_diff = new Eq().clone(eq).diff().clean();
+  }
+
+  function handleRandomize(event) {
+    eq = new Eq().random();
+    eq_diff = new Eq().clone(eq).diff().clean();
   }
 
   onMount(() => {
@@ -54,15 +59,16 @@
   <div class="flex w-full p-4 text-lg text-gray-50 bg-gray-900 shadow-lg justify-between" id="topbar">
     <div class="flex items-center">
       <input type="text" class="mr-2 p-2 border-2 border-gray-400 rounded-md bg-gray-800 hover:bg-slate-700 focus:bg-slate-700" id="textbox" on:keydown={handleKey} placeholder="(계수)x^(차수)꼴로 입력..">
+      <button class="p-2 border-2 border-gray-600 rounded-md bg-slate-950 hover:bg-slate-900 cursor-pointer" on:click={handleRandomize}>🔀</button>
     </div>
     <div class="PT text-3xl flex items-center text-center justify-between">
       <span class="mr-3">y={eq.to_string()}</span>
       <img src="arrow.png" class="mr-3 w-[20%]" alt="arrow">
       <span>y'={eq_diff.to_string()}</span>
     </div>
-    <div class="flex flex-col">
+    <div class="flex flex-col w-90">
       <div class="flex justify-end items-center">
-        <span class="mr-1">정의역 : {domain}</span>
+        <span class="mr-1">정의역 : {domain / 2}</span>
         <input type="range" min="10" max="90" bind:value={domain}>
       </div>
       <div class="flex justify-end items-center">
@@ -81,7 +87,7 @@
 
 <div class="fixed flex bottom-0 left-0 p-2.5 rounded-tr-md text-lg text-gray-50 bg-gray-900 shadow-lg justify-between">
   <div class="flex items-center mr-3">
-    <span class="mr-1 block w-35">초깃값(x₀) : {x_init}</span>
+    <span class="mr-1 block w-35">초깃값(x₀) : {x_init / 2}</span>
     <input type="range" min="-30" max="30" step="0.1" bind:value={x_init} class="w-100">
   </div>
   <div class="flex items-center">

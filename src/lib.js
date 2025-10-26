@@ -46,6 +46,15 @@ export class Eq {
         this.terms = terms;
     }
 
+    clone(from) {
+        let terms = [];
+        for (let t of from.terms) {
+            terms.push(t);
+        }
+
+        return new Eq(terms);
+    }
+
     diff() {
         let n = this.terms;
         for (let i in n) {
@@ -55,7 +64,7 @@ export class Eq {
         return new Eq(n);
     }
 
-    collect() {
+    collect() { //to array of coefficients
         let n = [];
         for (let t of this.terms) {
             if (!n[t.degree]) {
@@ -78,7 +87,7 @@ export class Eq {
         let c = this.collect();
         let terms = []
         for (let i in c) {
-            if (c[i]) {
+            if (c[i] && c[i] != 0) {
                 terms.push(new Term(c[i], i));
             }
         }
@@ -162,4 +171,43 @@ export class Eq {
 
         return y;
     }
+
+    random() {
+        const degree = randomFromArray([4,4,4,5]);
+        const terms = [];
+
+        if (degree == 5) {
+            terms.push(new Term(1,5));
+            terms.push(new Term(getRandomInt(-3,3),4));
+            terms.push(new Term(getRandomInt(-6,1),3));
+            terms.push(new Term(getRandomInt(-5,1),2));
+            terms.push(new Term(getRandomInt(-8,1),1));
+            terms.push(new Term(getRandomInt(-5,5),0));
+        } else if (degree == 4) {
+            terms.push(new Term(getRandomInt(1,2),4));
+            terms.push(new Term(getRandomPosNeg(3,7),3));
+            terms.push(new Term(getRandomPosNeg(3,8), 2));
+            terms.push(new Term(getRandomPosNeg(4,12), 1));
+            terms.push(new Term(getRandomInt(-5,5),0));
+        }
+        
+        return new Eq(terms).clean();
+    }
 }
+
+function getRandomPosNeg(min,max) {
+    const uint = getRandomInt(min,max);
+    const sign = randomFromArray([1,-1,-1]);
+    return sign * uint;
+}
+
+function getRandomInt(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+}
+
+function randomFromArray(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
